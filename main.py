@@ -26,8 +26,8 @@ def help_info(message):
 
 @bot.message_handler(commands=['game'])
 def guess_game(message):
-    bot.send_message(message.chat.id, "Угадайте число от 1 до 10, у вас 5 попыток!")
-    ans = randint(1, 10)
+    bot.send_message(message.chat.id, "Угадайте число от 1 до 100, у вас 7 попыток!")
+    ans = randint(1, 100)
     try_num = 1
     bot.register_next_step_handler(message, guess_game_1, ans, try_num)
 
@@ -44,7 +44,7 @@ def guess_game_1(message, ans: int, try_num: int):
         if(ans == n):
             bot.send_message(message.chat.id, "Поздравляю! Вы угадали")
         else:
-            if try_num > 4:
+            if try_num > 7:
                 bot.send_message(message.chat.id, "Попытки кончились :(")
                 return
             if ans < n:
@@ -52,9 +52,9 @@ def guess_game_1(message, ans: int, try_num: int):
             else:
                 bot.send_message(message.chat.id, f'Загаданное число больше вашего')
             if try_num < 4:
-                bot.send_message(message.chat.id, f'Осталось {5 - try_num} попытки')
+                bot.send_message(message.chat.id, f'Осталось {7 - try_num} попытки/попыток')
             else:
-                bot.send_message(message.chat.id, f'Осталось {5 - try_num} попытка')
+                bot.send_message(message.chat.id, f'Осталось {7 - try_num} попытки/попыток')
             try_num += 1
             bot.register_next_step_handler(message, guess_game_1, ans, try_num)
     else:
