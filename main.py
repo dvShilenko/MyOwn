@@ -13,7 +13,8 @@ API_WEATHER = '96db9f2d7a8c694a18e79b71adcfbe49'
 @bot.message_handler(commands=['start'])
 def welcome_activity(message):
     bot.send_message(message.chat.id, f'<b>Привет</b>, {message.from_user.first_name} {message.from_user.last_name}!\n'
-                                      'Воспользуйся командой <u>/help</u>, чтобы получить информацию о возиожном взаимодействии',
+                                      'Воспользуйся командой <u>/help</u>,'
+                                      ' чтобы получить информацию о возможном взаимодействии',
                      parse_mode='html')
 
 
@@ -69,7 +70,7 @@ def weather_info_ans(message):
     res = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={city}'
                        f'&appid={API_WEATHER}&units=metric&lang=ru')
     data = json.loads(res.text)
-    bot.send_message(message.chat.id, f'На данный момент погодa в городе {city.title()} {data["weather"][0]["description"]},'
+    bot.send_message(message.chat.id, f'На данный момент в городе {city.title()} {data["weather"][0]["description"]},'
                               f' температура: {data["main"]["temp"]}')
 
 
